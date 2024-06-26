@@ -30,6 +30,10 @@ export function BasicInfoInput({ email, setUserInfo, vis, goNext }:
         goNext();
     };
 
+    const [phoneMes, setPhoneMes] = useState("");
+    const [phoneVer, setPhoneVer] = useState("");
+    const [trigger, setTrigger] = useState(false);
+
     return (
         <RegisterComponent title="기본 정보 입력" vis={vis}>
             <table className="basic-info-table">
@@ -66,29 +70,32 @@ export function BasicInfoInput({ email, setUserInfo, vis, goNext }:
                     <th>
                         <div>
                             <input type="tel" placeholder="010-1234-5678" onChange={e => setPhoneNumber(e.target.value)} />
-                            <button>인증</button>
+                            <button onClick={() => {
+                                setPhoneMes("인증번호가 전송됐습니다. 메시지를 확인해주세요.");
+                                setTrigger(true);
+                            }}>인증</button>
                         </div>
                     </th>
                 </tr>
                 <tr>
                     <th></th>
-                    <th><p>asdfasdfasdfasdfasdfasdfasdfasdfasdfasdf</p></th>
+                    <th><p>{phoneMes}</p></th>
                 </tr>
                 <tr className="space" />
 
-                <tr className="input-button">
+                <tr className="input-button" style={trigger ? {} : {display: "none"}}>
                     <th></th>
                     <th>
                         <div>
-                            <input />
-                            <button>확인</button>
+                            <input placeholder="인증번호"/>
+                            <button onClick={() => setPhoneVer("인증됐습니다!")}>확인</button>
                         </div>
 
                     </th>
                 </tr>
                 <tr>
                     <th></th>
-                    <th><p>asdfasdf</p></th>
+                    <th><p>{phoneVer}</p></th>
                 </tr>
             </table>
             <div className="buttonBar">
