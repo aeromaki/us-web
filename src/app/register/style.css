@@ -160,11 +160,17 @@ tr.input-button+tr p {
     background-color: lightgrey;
 }
 
+.guide {
+    color: white;
+    font-size: 22.5px;
+    text-align: center;
+}
+
 .record-table {
     width: 100%;
     border: none;
     border-spacing: 20px 0;
-    margin-top: 50px;
+    margin-top: 30px;
     color: white;
     border-spacing: 20px 50px;
 }
