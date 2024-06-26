@@ -1,8 +1,9 @@
 "use client";
 
 import "./style.css";
-import Cookies from "js-cookie";
 import { useEffect, useState, Dispatch, SetStateAction } from "react";
+import Cookies from "js-cookie";
+
 
 import { BasicInfoInput, RecordInput, TagInput, BasicUserInfo, FADEIN_TIME } from "./assets";
 
