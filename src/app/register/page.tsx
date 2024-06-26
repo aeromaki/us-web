@@ -2,7 +2,7 @@
 
 import "./style.css";
 import Cookies from "js-cookie";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Dispatch, SetStateAction } from "react";
 
 import { BasicInfoInput, RecordInput, TagInput, BasicUserInfo, FADEIN_TIME } from "./assets";
 
@@ -26,27 +26,18 @@ export default function Home() {
     const [vis1, setVis1] = useState(false);
     const [vis2, setVis2] = useState(false);
 
-    const goNext0 = () => {
-        setVis0(false);
-        setTimeout(() => setVis1(true), FADEIN_TIME);
+    const createGoAction = (
+        svA: Dispatch<SetStateAction<boolean>>,
+        svB: Dispatch<SetStateAction<boolean>>
+    ) => () => {
+        svA(false);
+        setTimeout(() => svB(true), FADEIN_TIME);
     };
-
-    const goPrev1 = () => {
-        setVis1(false);
-        setTimeout(() => setVis0(true), FADEIN_TIME);
-    };
-    const goNext1 = () => {
-        setVis1(false);
-        setTimeout(() => setVis2(true), FADEIN_TIME);
-    };
-
-    const goPrev2 = () => {
-        setVis2(false);
-        setTimeout(() => setVis1(true), FADEIN_TIME);
-    };
-    const submit = () => {
-        setVis2(false);
-    }
+    const goNext0 = createGoAction(setVis0, setVis1);
+    const goPrev1 = createGoAction(setVis1, setVis0);
+    const goNext1 = createGoAction(setVis1, setVis2);
+    const goPrev2 = createGoAction(setVis2, setVis1);
+    const submit = () => setVis2(false);
 
     return (
         <>
