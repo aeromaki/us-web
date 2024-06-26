@@ -36,37 +36,35 @@ function checkGoogleAccessToken(access_token: string): Promise<AxiosResponse<any
 
 export default function Home() {
   const { push } = useRouter();
-
   const googleLogin = useGoogleLogin({
     onSuccess: tokenResponse => {
       const access_token = tokenResponse.access_token;
       if (access_token) {
         checkGoogleAccessToken(access_token)
                 .then(res => {
-                    console.log(res.data);
-
-                    const cookieValue = JSON.stringify({ email: res.data.email, access_token: access_token });
-                    console.log(cookieValue);
-                    Cookies.set("usUser", cookieValue);
-
-                    push("/register");
-
-                    /*
-                    axios.post(process.env.BACKEND ?? "", {
-                      email: res.data.email,
-                      access_token: user.access_token
+                    axios.post("/api/validateToken", { email: res.data.email, access_token: access_token }).then(res => {
+                      console.log("validateToken", res.data);
+                      return axios.get("/api/userInfo");
                     })
-                    */
+                      .then(res => {
+                        const { email, name, phoneNumber, sex } = res.data.user;
+                        console.log("userInfo", res.data, { email, name, phoneNumber, sex });
+
+                        if ((email != null) && (name != null) && (phoneNumber != null) && (sex != null)) {
+                          Cookies.set("usUserInfo", JSON.stringify({ email, name, phoneNumber, sex }));
+                          push("/main");
+                        }
+                        else {
+                          Cookies.set("usUserEmail", JSON.stringify({ email }));
+                          push("/register");
+                        }
+                      })
+                      .catch(err => console.log(err));
                 })
-                /*
-                .then(res => {
-                  console.log(res);
-                })
-                */
                 .catch(err => console.log(err));
       }
     },
-    onError: () => console.log("fuck")
+    onError: () => console.log("no")
   });
 
   return (

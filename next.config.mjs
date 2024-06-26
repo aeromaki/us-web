@@ -14,7 +14,15 @@ const nextConfig = {
                 ]
             }
         ]
-    }
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: process.env.BACKEND + "/:path*"
+      }
+    ]
+  }
 };
 
 export default nextConfig;

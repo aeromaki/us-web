@@ -3,6 +3,7 @@
 import "./style.css";
 import { useEffect, useState, Dispatch, SetStateAction } from "react";
 import Cookies from "js-cookie";
+import axios from "axios";
 
 
 import { BasicInfoInput, RecordInput, TagInput, BasicUserInfo, FADEIN_TIME } from "./assets";
@@ -19,10 +20,9 @@ export default function Home() {
     const [tags, setTags] = useState<string[]>([]);
 
     useEffect(() => {
-        Cookies.get("usUser")
-        const { email, access_token } = JSON.parse(Cookies.get("usUser") ?? "{}");
+        const { email } = JSON.parse(Cookies.get("usUserEmail") ?? "{}");
         setUserInfo({ ...userInfo, email: email });
-        //Cookies.remove("usUser");
+        //Cookies.remove("usUserEmail");
     }, []);
 
     const [vis0, setVis0] = useState(true);
@@ -40,7 +40,17 @@ export default function Home() {
     const goPrev1 = createGoAction(setVis1, setVis0);
     const goNext1 = createGoAction(setVis1, setVis2);
     const goPrev2 = createGoAction(setVis2, setVis1);
-    const submit = () => setVis2(false);
+
+    const submit = () => {
+        setVis2(false);
+        axios.post("/api/saveFeatureSelection", {
+            feature_value_1: tags[0],
+            feature_value_2: tags[1],
+            feature_value_3: tags[2],
+            feature_value_4: tags[3],
+            feature_value_5: tags[4]
+        }).then(res => console.log(res)).catch(err => console.log(err));
+    };
 
     return (
         <>
