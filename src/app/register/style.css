@@ -254,12 +254,14 @@ tr.input-button+tr p {
 }
 
 .search-bar>input {
-    width: 260px;
-    height: 45px;
+    width: 255px;
+    height: 90%;
     border-radius: 7.5px;
 }
 
 .search-bar>button {
+    width: 30px;
+    height: 30px;
     border: none;
     background-color: transparent;
 }

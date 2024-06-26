@@ -3,7 +3,7 @@ import { Searcher } from "fast-fuzzy";
 
 import RegisterComponent from "./_RegisterComponent";
 
-const test = ["NLP(자연어 처리)","개발","컴퓨터과학","프로그래밍 언어","인공지능","머신러닝","데이터 과학","텍스트 마이닝",
+const tagList = ["NLP(자연어 처리)","개발","컴퓨터과학","프로그래밍 언어","인공지능","머신러닝","데이터 과학","텍스트 마이닝",
     "로봇공학","사물인터넷","블록체인","암호화폐","자율주행","항공우주","드론","천문학","물리학","화학","생물학","지질학","시스템 구축",
     "엔비디아 (주식)","온톨로지","가벼운 글쓰기","창작 글쓰기","시 쓰기","소설 읽기","그림 그리기","페인팅","공예","도예","조각",
     "명화 감상","사진 찍기","영상촬영","비디오 편집","포토샵","연극","뮤지컬","오페라","영화","애니메이션","그래픽 디자인","웹 디자인",
@@ -46,7 +46,7 @@ function TagSearch({ tags, setTags }: { tags: string[], setTags: Dispatch<SetSta
     const [query, setQuery] = useState("");
     const [results, setResults] = useState<string[]>([]);
 
-    const searcher = new Searcher(test, {threshold: 0.4});
+    const searcher = new Searcher(tagList, {threshold: 0.4});
 
     const onQueryChange = (e: any) => {
         setQuery(e.target.value);
@@ -55,7 +55,7 @@ function TagSearch({ tags, setTags }: { tags: string[], setTags: Dispatch<SetSta
     };
 
     const onResultClick = (res: string) => {
-        if (!tags.includes(res)) {
+        if (!tags.includes(res) && tags.length < 5) {
             setTags([...tags, res]);
         }
     };
@@ -63,7 +63,7 @@ function TagSearch({ tags, setTags }: { tags: string[], setTags: Dispatch<SetSta
     return (
         <div className="search-bar-container">
             <div className="search-bar">
-                <input type="text" onChange={onQueryChange} value={query} placeholder="검색해보세요!"/>
+                <input type="text" onChange={onQueryChange} value={query} placeholder="취향 검색"/>
                 <button onClick={() => setQuery("")}>X</button>
             </div>
             {
@@ -78,15 +78,15 @@ function TagSearch({ tags, setTags }: { tags: string[], setTags: Dispatch<SetSta
     )
 }
 
-export function TagInput({ vis, goPrev, submit }:
+export function TagInput({ tags, setTags, vis, goPrev, submit }:
     {
+        tags: string[],
+        setTags: Dispatch<SetStateAction<string[]>>
         vis: boolean,
         goPrev: () => void,
         submit: () => void
     }
 ) {
-    const [tags, setTags] = useState<string[]>(test.slice(0, 10));
-
     const onSubmit = () => {
         submit();
     };

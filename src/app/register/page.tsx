@@ -16,6 +16,8 @@ export default function Home() {
         phoneNumber: ""
     });
 
+    const [tags, setTags] = useState<string[]>([]);
+
     useEffect(() => {
         Cookies.get("usUser")
         const { email, access_token } = JSON.parse(Cookies.get("usUser") ?? "{}");
@@ -46,7 +48,7 @@ export default function Home() {
                 <div className="inner-box">
                     <BasicInfoInput email={userInfo.email} setUserInfo={setUserInfo} vis={vis0} goNext={goNext0}/>
                     <RecordInput vis={vis1} goPrev={goPrev1} goNext={goNext1}/>
-                    <TagInput vis={vis2} goPrev={goPrev2} submit={submit}/>
+                    <TagInput tags={tags} setTags={setTags} vis={vis2} goPrev={goPrev2} submit={submit}/>
                 </div>
             </div>
             {/*
