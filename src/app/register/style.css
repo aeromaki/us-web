@@ -1,0 +1,188 @@
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.us-emoji-small {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 50px
+}
+
+.info-section-title {
+    font-size: 35px;
+    color: white;
+}
+
+.basic-info-table {
+    width: 100%;
+    border: none;
+    border-spacing: 20px 0;
+    margin-top: 50px;
+}
+
+tr.space {
+    height: 45px;
+}
+
+/* info key blocks */
+.basic-info-table>tr>th:first-child {
+    width: 100px;
+    font-weight: normal;
+    font-size: 27.5px;
+    color: white;
+}
+
+/* info value blocks */
+.basic-info-table>tr>th:last-child {
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input {
+    border: 0.5px solid lightgray;
+    border-radius: 20px;
+    width: 250px;
+    height: 40px;
+    font-size: 22.5px;
+    text-align: center;
+}
+
+input[type=email] {
+    width: 100%;
+    max-width: 500px;
+}
+
+/* name */
+.basic-info-table>tr:nth-child(3) input {
+    width: 150px;
+}
+
+/* sex */
+.basic-info-table>tr>th>label {
+    display: inherit;
+    align-items: inherit;
+    font-weight: normal;
+    font-size: 25px;
+    color: white;
+}
+
+/* sex radio margin between */
+.basic-info-table>tr>th>label:first-of-type {
+    margin-right: 12.5%;
+}
+
+input[type=radio] {
+    width: 30px;
+    height: 30px;
+}
+
+tr.input-button div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+tr.input-button div>*:first-child {
+    margin-left: 10%;
+}
+
+tr.input-button div>*:last-child {
+    margin-right: 10%;
+}
+
+tr.input-button div>button {
+    border-radius: 5px;
+    height: 40px;
+    font-size: 22.5px;
+    text-align: center;
+    border: 0.5px solid lightgray;
+    background-color: white;
+}
+
+tr.input-button div>button:active {
+    background-color: lightgrey;
+}
+
+tr.input-button+tr p {
+    margin: 0 0 0 0;
+    width: 80%;
+    max-width: 400px;
+    text-align: left;
+    font-weight: lighter;
+    overflow-wrap: break-word;
+    word-break: keep-all;
+    color: greenyellow;
+}
+
+.buttonBar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 40px;
+    margin-bottom: 2.5vh;
+}
+
+.buttonBar>button {
+    border-radius: 20px;
+    margin: 10px;
+    padding: 12.5px 20px 12.5px 20px;
+    font-size: 20px;
+    border: 0.5px solid lightgray;
+    background-color: white;
+    cursor: pointer;
+}
+
+.buttonBar>button:hover {
+    background-color: ghostwhite;
+}
+
+.buttonBar>button:active {
+    background-color: lightgrey;
+}
+
+.record-table {
+    width: 100%;
+    border: none;
+    border-spacing: 20px 0;
+    margin-top: 50px;
+    color: white;
+    border-spacing: 20px 50px;
+}
+
+/* record question numbers */
+.record-table>tr>th:first-child {
+    width: 10%;
+    font-weight: normal;
+    font-size: 40px;
+    text-align: left;
+}
+
+/* record questions */
+.record-table>tr>th:nth-child(2) {
+    width: 65%;
+    font-weight: normal;
+    font-size: 25px;
+    text-align: right;
+    overflow-wrap: break-word;
+    word-break: keep-all;
+}
