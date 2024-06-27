@@ -117,7 +117,7 @@ export default function Home() {
                 await uploadRecords();
                 await uploadTags();
                 setVisFinal(true);
-                setTimeout(() => push("/main"), 2500);
+                setTimeout(() => push("/main"), 4000);
                 break;
             }
             case 1: {

@@ -36,10 +36,14 @@ export default function Home() {
     }, []);
 
     const [invisStyle, setInvisStyle] = useState<any>({});
+    const [invisStyle1, setInvisStyle1] = useState<any>({ display: "none" });
 
     const match = useCallback(() => {
-        setInvisStyle({ animation: "fade-out 1s" });
-        setTimeout(() => setInvisStyle({ display: "none" }), 1000);
+        setInvisStyle({ animation: "fade-out 3s" });
+        setTimeout(() => {
+            setInvisStyle({ display: "none" });
+            setInvisStyle1({ display: "flex", animation: "fade-in 2s" });
+        }, 3000);
     }, []);
 
     return (
@@ -64,6 +68,9 @@ export default function Home() {
                     <button>로그아웃</button>
                 </div>
                 <button className="match-button" onClick={match}>대화 상대 찾기</button>
+            </div>
+            <div className="inner-box" style={invisStyle1}>
+                <div style={{width: "100px", height: "100px", backgroundColor: "white"}}></div>
             </div>
         </div>
     );

@@ -4,6 +4,8 @@ import { SetStateAction, useState, useRef, useCallback, Dispatch, useEffect } fr
 import Image from "next/image";
 import { RecordRTCPromisesHandler } from "recordrtc";
 
+const MAX_RECORD_TIME = 60;
+
 function RecordButton({ blob, setBlob }: {
     blob: Blob | undefined,
     setBlob: Dispatch<SetStateAction<Blob | undefined>>
@@ -17,6 +19,8 @@ function RecordButton({ blob, setBlob }: {
         isRecordingRef.current = false;
     }, []);
 
+    const [time, setTime] = useState(MAX_RECORD_TIME);
+
     const onStopClick = useCallback(async () => {
         await recorderRef.current?.stopRecording();
         setBlob(await recorderRef.current?.getBlob());
@@ -29,6 +33,27 @@ function RecordButton({ blob, setBlob }: {
         streamRef.current?.getAudioTracks()[0].stop();
     }, [setBlob]);
 
+    useEffect(() => {
+        if (isRecordingRef.current) {
+            let timer = setInterval(() => {
+                if (!isRecordingRef.current) {
+                    clearInterval(timer);
+                }
+                setTime(t => {
+                    console.log(isRecordingRef.current, isRecording, t)
+                    if (t == 1) {
+                        clearInterval(timer);
+                        onStopClick();
+                        return 0;
+                    }
+                    else {
+                        return t - 1;
+                    }
+                });
+            }, 1000);
+        }
+    }, [isRecording, onStopClick]);
+
     const onRecordClick = useCallback(async () => {
         streamRef.current = await navigator.mediaDevices.getUserMedia({audio: true});
         recorderRef.current = new RecordRTCPromisesHandler(streamRef.current, {
@@ -39,16 +64,19 @@ function RecordButton({ blob, setBlob }: {
 
         isRecordingRef.current = true;
         setIsRecording(true);
+        setTime(MAX_RECORD_TIME);
 
         console.log("recording...", isRecordingRef.current);
 
+        /*
         setTimeout(async () => {
             console.log("time limit", isRecordingRef.current);
             if (isRecordingRef.current) {
                 await onStopClick();
             }
         }, 60000);
-    }, [onStopClick]);
+        */
+    }, []);
 
     return (
         <>{
@@ -56,7 +84,7 @@ function RecordButton({ blob, setBlob }: {
             <button className="record-button" onClick={onStopClick}
                 style={ { border: "3px solid red" }}
             >
-                stop
+                {time}
             </button> :
             <button className="record-button" onClick={onRecordClick}
                 style={blob ? { border: "3px solid lightgreen" } : {}}
