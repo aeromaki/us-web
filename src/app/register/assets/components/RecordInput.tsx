@@ -4,7 +4,7 @@ import { SetStateAction, useState, useRef, useCallback, Dispatch, useEffect } fr
 import Image from "next/image";
 import { RecordRTCPromisesHandler } from "recordrtc";
 
-const MAX_RECORD_TIME = 60;
+const MAX_RECORD_TIME = 10;
 
 function RecordButton({ blob, setBlob }: {
     blob: Blob | undefined,
@@ -42,8 +42,8 @@ function RecordButton({ blob, setBlob }: {
                 setTime(t => {
                     console.log(isRecordingRef.current, isRecording, t)
                     if (t == 1) {
-                        clearInterval(timer);
                         onStopClick();
+                        clearInterval(timer);
                         return 0;
                     }
                     else {
@@ -67,15 +67,6 @@ function RecordButton({ blob, setBlob }: {
         setTime(MAX_RECORD_TIME);
 
         console.log("recording...", isRecordingRef.current);
-
-        /*
-        setTimeout(async () => {
-            console.log("time limit", isRecordingRef.current);
-            if (isRecordingRef.current) {
-                await onStopClick();
-            }
-        }, 60000);
-        */
     }, []);
 
     return (
