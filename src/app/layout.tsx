@@ -7,7 +7,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Us!",
+  title: "Us",
   description: "2024-1 YBIGTA conference",
 };
 
@@ -20,6 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        <meta name="theme-color" content="#000000"></meta>
       </head>
       <GoogleOAuthProvider clientId={process.env.CLIENT_ID ?? ""}>
       <body className={inter.className}>{children}</body>

@@ -23,6 +23,7 @@
 }
 
 .login-button {
+    border: none;
     border-radius: 100px;
     background-color: white;
     font-size: 18.5px;

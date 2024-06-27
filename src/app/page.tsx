@@ -42,6 +42,7 @@ export default function Home() {
       if (access_token) {
         checkGoogleAccessToken(access_token)
                 .then(res => {
+                    console.log(JSON.stringify({ email: res.data.email, access_token: access_token }));
                     axios.post("/api/validateToken", { email: res.data.email, access_token: access_token }).then(res => {
                       console.log("validateToken", res.data);
                       return axios.get("/api/userInfo");
@@ -68,7 +69,6 @@ export default function Home() {
   });
 
   return (
-    <>
       <div className="h-frame">
         <div className="inner-box">
           <h1 className="us-emoji">🌎</h1>
@@ -80,6 +80,5 @@ export default function Home() {
           <LoginButton onClick={undefined} imgSrc='/apple.png' text="Apple ID로 로그인"/>
         </div>
       </div>
-    </>
   );
 }

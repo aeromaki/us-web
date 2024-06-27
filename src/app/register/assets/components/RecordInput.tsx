@@ -47,7 +47,7 @@ function RecordButton({ blob, setBlob }: {
             if (isRecordingRef.current) {
                 await onStopClick();
             }
-        }, 5000);
+        }, 60000);
     }, [onStopClick]);
 
     return (
