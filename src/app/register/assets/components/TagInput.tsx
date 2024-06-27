@@ -1,4 +1,4 @@
-import { useState, Dispatch, SetStateAction } from "react";
+import { useState, Dispatch, SetStateAction, useCallback } from "react";
 import { Searcher } from "fast-fuzzy";
 
 import RegisterComponent from "./_RegisterComponent";
@@ -46,13 +46,13 @@ function TagSearch({ tags, setTags }: { tags: string[], setTags: Dispatch<SetSta
     const [query, setQuery] = useState("");
     const [results, setResults] = useState<string[]>([]);
 
-    const searcher = new Searcher(tagList, {threshold: 0.4});
+    const [searcher, setSearcher] = useState(new Searcher(tagList, {threshold: 0.5}));
 
-    const onQueryChange = (e: any) => {
+    const onQueryChange = useCallback((e: any) => {
         setQuery(e.target.value);
         const res = searcher.search(query).slice(0, 10);
         setResults(res);
-    };
+    }, [query]);
 
     const onResultClick = (res: string) => {
         if (!tags.includes(res) && tags.length < 5) {
@@ -63,7 +63,17 @@ function TagSearch({ tags, setTags }: { tags: string[], setTags: Dispatch<SetSta
     return (
         <div className="search-bar-container">
             <div className="search-bar">
-                <input type="text" onChange={onQueryChange} value={query} placeholder="취향 검색"/>
+                <input
+                    type="text"
+                    onChange={onQueryChange}
+                    onKeyDown={e => {
+                        if (e.key == "Enter" && tagList.includes(query)) {
+                            onResultClick(query);
+                        }
+                    }}
+                    value={query}
+                    placeholder="취향 검색"
+                />
                 <button onClick={() => setQuery("")}>X</button>
             </div>
             {
