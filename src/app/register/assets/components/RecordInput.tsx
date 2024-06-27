@@ -2,9 +2,9 @@ import RegisterComponent from "./_RegisterComponent";
 
 import { SetStateAction, useState, useRef, useCallback, Dispatch, useEffect } from "react";
 import Image from "next/image";
-import { RecordRTCPromisesHandler } from "recordrtc";
+import RecordRTC, { RecordRTCPromisesHandler } from "recordrtc";
 
-const MAX_RECORD_TIME = 10;
+const MAX_RECORD_TIME = 60;
 
 function RecordButton({ blob, setBlob }: {
     blob: Blob | undefined,
@@ -23,7 +23,10 @@ function RecordButton({ blob, setBlob }: {
 
     const onStopClick = useCallback(async () => {
         await recorderRef.current?.stopRecording();
-        setBlob(await recorderRef.current?.getBlob());
+        const newBlob = await recorderRef.current?.getBlob();
+        setBlob(newBlob);
+
+        // RecordRTC.invokeSaveAsDialog(newBlob ?? Blob.prototype, 'test.wav');
 
         isRecordingRef.current = false;
         setIsRecording(false);
@@ -40,9 +43,8 @@ function RecordButton({ blob, setBlob }: {
                     clearInterval(timer);
                 }
                 setTime(t => {
-                    console.log(isRecordingRef.current, isRecording, t)
                     if (t == 1) {
-                        onStopClick();
+                        (async () => { await onStopClick() })();
                         clearInterval(timer);
                         return 0;
                     }
@@ -73,12 +75,12 @@ function RecordButton({ blob, setBlob }: {
         <>{
             isRecordingRef.current ?
             <button className="record-button" onClick={onStopClick}
-                style={ { border: "3px solid red" }}
+                style={{ backgroundColor: "#E81C1C", fontSize: "20px" }}
             >
                 {time}
             </button> :
             <button className="record-button" onClick={onRecordClick}
-                style={blob ? { border: "3px solid lightgreen" } : {}}
+                style={blob ? { backgroundColor: "#2BE21B", fontSize: "15px" } : {}}
             >
                 {
                     blob ?

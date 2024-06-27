@@ -116,7 +116,7 @@ tr.input-button+tr p {
     font-weight: lighter;
     overflow-wrap: break-word;
     word-break: keep-all;
-    color: greenyellow;
+    color: #2BE21B;
 }
 
 .buttonBar {
@@ -188,6 +188,7 @@ tr.input-button+tr p {
     justify-content: center;
     align-items: center;
     margin-left: 20px;
+    color: white;
 }
 
 .record-button>img {
@@ -195,11 +196,11 @@ tr.input-button+tr p {
 }
 
 .record-button:hover {
-    background-color: lightgray;
+    filter: brightness(85%);
 }
 
 .record-button:active {
-    background-color: gray;
+    filter: brightness(50%);
 }
 
 .tag-storage {
