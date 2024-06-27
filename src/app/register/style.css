@@ -63,11 +63,16 @@ input {
     height: 40px;
     font-size: 22.5px;
     text-align: center;
+    caret-color: auto;
 }
 
 input[type=email] {
     width: 100%;
     max-width: 500px;
+}
+
+input[type=email][disabled] {
+    color: gray;
 }
 
 /* name */
@@ -193,6 +198,30 @@ tr.input-button+tr p {
     word-break: keep-all;
 }
 
+.record-button {
+    width: 55px;
+    height: 55px;
+    background-color: white;
+    border: none;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.record-button>img {
+    opacity: 0.9;
+}
+
+.record-button:hover {
+    background-color: lightgray;
+}
+
+.record-button:active {
+    background-color: gray;
+}
+
 .tag-storage {
     display: flex;
     align-items: center;
@@ -286,6 +315,7 @@ tr.input-button+tr p {
     padding: 5px 10px 5px 10px;
     cursor: pointer;
     border-bottom: 0.5px solid lightgray;
+    font-size: 20px;
 }
 
 .search-results p:hover {

@@ -94,8 +94,8 @@ export function TagInput({ tags, setTags, vis, goPrev, submit }:
     return (
         <RegisterComponent title="취향 선택" vis={vis}>
             <p className="guide">
-                당신의 취미, 관심사, 취향을 선택해주세요.<br />
-                최대 5개까지 고를 수 있나?
+                당신을 이루는 것들이 궁금합니다.<br />
+                당신이 가장 좋아하는 다섯 가지를 아래에서 골라주세요.
             </p>
             <TagStorage tags={tags} setTags={setTags}/>
             <TagSearch tags={tags} setTags={setTags}/>

@@ -35,8 +35,9 @@ export function BasicInfoInput({ email, setUserInfo, vis, goNext }:
     const [trigger, setTrigger] = useState(false);
 
     return (
-        <RegisterComponent title="기본 정보 입력" vis={vis}>
+        <RegisterComponent title="가입" vis={vis}>
             <table className="basic-info-table">
+                <tbody className="basic-info-table">
                 <tr>
                     <th>이메일</th>
                     <th><input type="email" value={email} disabled={true} /></th>
@@ -97,6 +98,7 @@ export function BasicInfoInput({ email, setUserInfo, vis, goNext }:
                     <th></th>
                     <th><p>{phoneVer}</p></th>
                 </tr>
+                </tbody>
             </table>
             <div className="buttonBar">
                 <div></div>
