@@ -27,7 +27,7 @@ export default function Home() {
             router.push("/");
         }
         setUserInfo({ ...userInfo, email: email });
-        //Cookies.remove("usUserEmail");
+        Cookies.remove("usUserEmail");
     }, []);
 
     const [vis0, setVis0] = useState(true);
