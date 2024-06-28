@@ -48,11 +48,11 @@ function TagSearch({ tags, setTags }: { tags: string[], setTags: Dispatch<SetSta
 
     const [searcher, setSearcher] = useState(new Searcher(tagList, {threshold: 0.5}));
 
-    const onQueryChange = useCallback((e: any) => {
+    const onQueryChange = (e: any) => {
         setQuery(e.target.value);
         const res = searcher.search(query).slice(0, 10);
         setResults(res);
-    }, [query]);
+    };
 
     const onResultClick = (res: string) => {
         if (!tags.includes(res) && tags.length < 5) {
