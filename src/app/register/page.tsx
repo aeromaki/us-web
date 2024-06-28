@@ -24,7 +24,7 @@ export default function Home() {
     useEffect(() => {
         const { email } = JSON.parse(Cookies.get("usUserEmail") ?? `{ "email": "none" }`);
         if (email == "none") {
-            router.push("/");
+            //router.push("/");
         }
         setUserInfo({ ...userInfo, email: email });
         Cookies.remove("usUserEmail");
