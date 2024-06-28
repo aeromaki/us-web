@@ -90,3 +90,64 @@ body {
 .match-button:active {
     background-color: gray;
 }
+
+.match-done {
+    color: white;
+    font-size: 35px;
+    margin-bottom: 75px;
+}
+
+.profile-images {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-bottom: 50px;
+}
+
+.profile-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-box>span {
+    font-size: 25px;
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+.profile-images>span {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.reason {
+    color: white;
+    font-size: 20px;
+    line-height: 200%;
+    width: 550px;
+    height: 30vh;
+    overflow: scroll;
+    margin-bottom: 75px;
+    overflow-wrap: break-word;
+    word-break: keep-all;
+}
+
+.waiting {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.waiting>span {
+    color: white;
+    font-size: 20px;
+    margin-top: 20px;
+}

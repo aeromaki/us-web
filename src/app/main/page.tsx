@@ -35,10 +35,30 @@ export default function Home() {
         }).catch(err => console.log(err));
     }, []);
 
+    /*
+    const [matchResult, setMatchResult] = useState({
+        reason: "",
+        user_name: ""
+    });*/
+
+    const [matchResult, setMatchResult] = useState({
+        "reason": "",
+        "user_name": ""
+    });
+
+    const fetchMatch = () => {
+        console.log("fetchMatch");
+        axios.get("/match").then(res => {
+            console.log(res.data);
+            setMatchResult(res.data);
+        }).catch(err => console.log(err));
+    };
+
     const [invisStyle, setInvisStyle] = useState<any>({});
     const [invisStyle1, setInvisStyle1] = useState<any>({ display: "none" });
 
     const match = useCallback(() => {
+        fetchMatch();
         setInvisStyle({ animation: "fade-out 3s" });
         setTimeout(() => {
             setInvisStyle({ display: "none" });
@@ -53,7 +73,7 @@ export default function Home() {
                 <div className="profile">
                     <Image
                         className="profile-image"
-                        src="/sample-profile-image.jpg"
+                        src="/sample-profile-image-0.jpg"
                         alt="profile image"
                         width={120} height={120}
                     />
@@ -70,7 +90,44 @@ export default function Home() {
                 <button className="match-button" onClick={match}>대화 상대 찾기</button>
             </div>
             <div className="inner-box" style={invisStyle1}>
-                <div style={{width: "100px", height: "100px", backgroundColor: "white"}}></div>
+                {
+                    matchResult.reason ?
+                    <>
+                        <h2 className="match-done">매칭 완료!</h2>
+                        <div className="profile-images">
+                            <div className="profile-box">
+                                <Image
+                                    className="profile-image"
+                                    src="/sample-profile-image-0.jpg"
+                                    alt="profile image"
+                                    width={120} height={120}
+                                />
+                                <span>{infos.name}</span>
+                            </div>
+                            <span> - - - - - </span>
+                            <div className="profile-box">
+                                <Image
+                                    className="profile-image"
+                                    src="/sample-profile-image-1.jpg"
+                                    alt="profile image"
+                                    width={120} height={120}
+                                />
+                                <span>{matchResult.user_name}</span>
+                            </div>
+                        </div>
+                        <p className="reason">{matchResult.reason}</p>
+                        <button className="match-button">대화하기</button>
+                    </> :
+                    <div className="waiting">
+                        <Image
+                            className="dong"
+                            src="/dong.png"
+                            alt="prodong"
+                            width={536/2} height={668/2}
+                        />
+                        <span>매칭 중입니다. 잠시 기다려주세요...</span>
+                    </div>
+                }
             </div>
         </div>
     );
