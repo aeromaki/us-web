@@ -22,7 +22,7 @@ export default function Home() {
     const [tags, setTags] = useState<string[]>([]);
 
     useEffect(() => {
-        const { email } = JSON.parse(Cookies.get("usUserEmail") ?? `{ email: "none" }`);
+        const { email } = JSON.parse(Cookies.get("usUserEmail") ?? `{ "email": "none" }`);
         if (email == "none") {
             router.push("/");
         }
