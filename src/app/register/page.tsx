@@ -11,6 +11,7 @@ import { BasicInfoInput, RecordInput, TagInput, BasicUserInfo, FADEIN_TIME } fro
 
 
 export default function Home() {
+    const router = useRouter();
     const [userInfo, setUserInfo] = useState<BasicUserInfo>({
         email: "",
         name: "",
@@ -21,7 +22,10 @@ export default function Home() {
     const [tags, setTags] = useState<string[]>([]);
 
     useEffect(() => {
-        const { email } = JSON.parse(Cookies.get("usUserEmail") ?? "{}");
+        const { email } = JSON.parse(Cookies.get("usUserEmail") ?? `{ email: "none" }`);
+        if (email == "none") {
+            router.push("/");
+        }
         setUserInfo({ ...userInfo, email: email });
         //Cookies.remove("usUserEmail");
     }, []);
